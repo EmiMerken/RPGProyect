@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "grassPatch.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,7 +13,7 @@
             "scale": 0.9984895833333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 479.724584007094,
+                "x": 496.2495435814512,
                 "y": 319.98330812164204
             }
         },
@@ -29,11 +29,12 @@
     "last.imagePath": "C:/Users/emiji/Desktop/POO_codigos_2025-1-main/POO_codigos_2025-1-main/RPG_Overworld/assets",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "grassPatch.tmx"
     ],
     "project": "tiled1.tiled-project",
     "recentFiles": [
-        "stolenAssets.tsx",
         "grassPatch.tmx",
+        "stolenAssets.tsx",
         "set1.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
