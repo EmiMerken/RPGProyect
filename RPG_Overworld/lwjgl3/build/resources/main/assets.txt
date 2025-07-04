@@ -1,6 +1,7 @@
-.gitkeep
+enemy.png
 grassPatch.tmx
 map.tmx
+player.png
 stolenAssets.png
 stolenAssets.tsx
 tiled1.tiled-project

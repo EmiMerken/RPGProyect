@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -20,8 +22,10 @@ public class Main implements ApplicationListener {
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer renderer;
     OrthographicCamera camera;
+    Player player;
     @Override
     public void create() {
+        player = new Player(new Sprite(new Texture("player.png")));
         viewport = new FitViewport(8,8);
         stage = new Stage(viewport);
         batch = new SpriteBatch();
@@ -47,6 +51,7 @@ public class Main implements ApplicationListener {
         draw();
     }
     private void input(){
+        
 
     }
     private void logic(){
@@ -67,6 +72,8 @@ public class Main implements ApplicationListener {
         renderer.render();
 
         batch.begin();
+        player.draw(batch);
+        System.out.println(player.getOriginY());
         batch.end();
     }
 
