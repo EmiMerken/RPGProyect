@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity{
     private Vector2 velocity = new Vector2();
-    private float speed = 120.5f;
+    private float speed = 1.25f;
 
     public Player(Sprite sprite){
         super(sprite);
@@ -13,12 +13,19 @@ public class Player extends Entity{
 
     @Override
     public void update(float delta) {
+        /*
         if(velocity.y > speed){
-            velocity.y = speed;
-        } else if (velocity.y < speed){
-            velocity.y = -speed;
-        }
+        velocity.y = speed;
+    } else if (velocity.y < speed){
+        velocity.y = -speed;
+    }
         setX(getX() + velocity.x * delta);
         setY(getY() + velocity.y * delta);
+        }
+         */
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

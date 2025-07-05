@@ -2,6 +2,7 @@ package io.github.some_example_name;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class Main implements ApplicationListener {
+
     SpriteBatch batch;
     FitViewport viewport;
     Stage stage;
@@ -27,8 +29,8 @@ public class Main implements ApplicationListener {
     public void create() {
         player = new Player(new Sprite(new Texture("player.png")));
         viewport = new FitViewport(8,8);
-        stage = new Stage(viewport);
         batch = new SpriteBatch();
+        stage = new Stage(viewport,batch);
         Gdx.input.setInputProcessor(stage);
         tiledMap = new TmxMapLoader().load("grassPatch.tmx");
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -51,8 +53,20 @@ public class Main implements ApplicationListener {
         draw();
     }
     private void input(){
-        
+        float delta = Gdx.graphics.getDeltaTime();
 
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            player.translateX(player.getSpeed() * delta);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            player.translateX(-player.getSpeed() * delta);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            player.translateY(player.getSpeed() * delta);
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            player.translateY(-player.getSpeed() * delta);
+        }
     }
     private void logic(){
 
@@ -73,7 +87,6 @@ public class Main implements ApplicationListener {
 
         batch.begin();
         player.draw(batch);
-        System.out.println(player.getOriginY());
         batch.end();
     }
 
