@@ -177,6 +177,9 @@ public class FCommand extends JPanel implements KeyListener {
         }
 
     }
+    public int getSelectedIndex(){
+        return buttonsIndex;
+    }
 
     private void soliciteFocus(){
         this.setFocusable(true);
