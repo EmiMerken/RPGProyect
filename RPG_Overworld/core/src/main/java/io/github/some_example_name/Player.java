@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity{
     private Vector2 velocity = new Vector2();
-    private float speed = 1.25f;
+    private float speed = 100f;
 
     public Player(Sprite sprite){
         super(sprite);

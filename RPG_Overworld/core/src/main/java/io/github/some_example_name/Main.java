@@ -12,13 +12,13 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class Main implements ApplicationListener {
 
-    SpriteBatch batch;
+    SpriteBatch spriteBatch;
     FitViewport viewport;
     Stage stage;
     TiledMap tiledMap;
@@ -27,16 +27,15 @@ public class Main implements ApplicationListener {
     Player player;
     @Override
     public void create() {
-        player = new Player(new Sprite(new Texture("player.png")));
         viewport = new FitViewport(8,8);
-        batch = new SpriteBatch();
-        stage = new Stage(viewport,batch);
+        spriteBatch = new SpriteBatch();
+        stage = new Stage(viewport, spriteBatch);
         Gdx.input.setInputProcessor(stage);
         tiledMap = new TmxMapLoader().load("grassPatch.tmx");
-        renderer = new OrthogonalTiledMapRenderer(tiledMap);
 
-        float width = Gdx.graphics.getWidth();
-        float height = Gdx.graphics.getWidth();
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
+        player = new Player(new Sprite(new Texture("hero.png")));
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false,512,512);
     }
@@ -77,7 +76,7 @@ public class Main implements ApplicationListener {
         ScreenUtils.clear(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         viewport.apply();
-        batch.setProjectionMatrix(viewport.getCamera().combined);
+        spriteBatch.setProjectionMatrix(viewport.getCamera().combined);
 
         stage.act(delta);
         stage.draw();
@@ -85,9 +84,13 @@ public class Main implements ApplicationListener {
         renderer.setView(camera);
         renderer.render();
 
-        batch.begin();
-        player.draw(batch);
-        batch.end();
+//        spriteBatch.begin();
+//        player.draw(spriteBatch);
+//        spriteBatch.end();
+
+        renderer.getBatch().begin();
+        player.draw(renderer.getBatch());
+        renderer.getBatch().end();
     }
 
     @Override
@@ -103,5 +106,6 @@ public class Main implements ApplicationListener {
     @Override
     public void dispose() {
         stage.dispose();
+        player.getTexture().dispose();
     }
 }

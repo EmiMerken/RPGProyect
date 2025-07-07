@@ -1,5 +1,6 @@
 enemy.png
 grassPatch.tmx
+hero.png
 map.tmx
 player.png
 stolenAssets.png
