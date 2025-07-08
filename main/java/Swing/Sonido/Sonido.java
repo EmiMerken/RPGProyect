@@ -3,7 +3,9 @@ package Swing.Sonido;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 
 public class Sonido {
     private Clip clip;
@@ -11,24 +13,25 @@ public class Sonido {
 
     public Sonido() {
         soundURL = new URL[10];
-        try {
+        cargarSonidos("src/main/resources/Sonido");
+    }
 
-            soundURL[0] = getClass().getResource("/Sonido/batallaFondo.wav");
-            soundURL[1] = getClass().getResource("/Sonido/ataque-espada.wav");
-            soundURL[2] = getClass().getResource("/Sonido/golpe.wav");
-            soundURL[3] = getClass().getResource("/Sonido/presionarSonido.wav");
-            soundURL[4] = getClass().getResource("/Sonido/seleccionSonido.wav");
-            soundURL[5] = getClass().getResource("/Sonido/cura.wav");
-            soundURL[6] = getClass().getResource("/Sonido/gameOver.wav");
-            soundURL[7] = getClass().getResource("/Sonido/victoria.wav");
+    public void cargarSonidos(String directoryPath) {
+        File directory = new File(directoryPath);
+        File[] listaDeSonidos = Objects.requireNonNull(directory.listFiles());
 
-            for (int i = 0; i <= soundURL.length; i++) {
-                if (soundURL[i] == null) {
-                    System.err.println("¡Advertencia! No se pudo encontrar el archivo de sonido " + i);
-                }
+        if (directory.isDirectory() && directory.exists()) {
+            System.out.println("si es carpeta");
+        }
+
+        for (int i = 0; i < listaDeSonidos.length; i++) {
+            if (listaDeSonidos[i] != null) {
+                System.out.println(listaDeSonidos[i].getName());
+                soundURL[i] = getClass().getResource(listaDeSonidos[i].getName());
+                System.out.println(soundURL[i]);
+            } else {
+                System.out.println("no archivo");
             }
-        } catch (Exception e) {
-            System.err.println("Error al cargar los recursos de sonido: " + e.getMessage());
         }
     }
 
